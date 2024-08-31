@@ -16,7 +16,7 @@ Este repositorio contiene el código fuente para el frontend de la aplicación K
 1. Clonar el repositorio:
 
    ```bash
-   git clone <URL_DEL_REPOSITORIO_FRONTEND>
+   git clone https://github.com/rebkg87/kansha_frontend.git
    cd kansha-frontend
    ```
 
@@ -32,7 +32,7 @@ Este repositorio contiene el código fuente para el frontend de la aplicación K
    npm start
    ```
 
-La aplicación estará disponible en `http://localhost:3000`.
+La aplicación estará disponible en `http://localhost:3001`.
 
 ## Estructura del Proyecto
 
