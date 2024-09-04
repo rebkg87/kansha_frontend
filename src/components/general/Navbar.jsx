@@ -16,6 +16,12 @@ const Navbar = () => {
                 </div>
                 <div className="flex items-center gap-2 mr-2">
                     <InputV2 />
+                    <button className="h-[30px] w-[30px] rounded-full bg-zinc-400 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" heighzt="20" fill="none" viewBox="0 0 24 24">
+                            <path className="fill-light-gray" d="M10.953 19.895c-.583 0-1.056.473-1.056 1.05 0 .582.473 1.055 1.056 1.055h2.104c.583 0 1.056-.473 1.056-1.056a1.05 1.05 0 0 0-1.056-1.049h-2.104ZM12.002 2c-.499 0-.991.006-1.49.013C8 2.065 5.882 3.891 5.7 6.275a53.559 53.559 0 0 0-.136 5.582 3.4 3.4 0 0 1-1.03 2.54c-.09.09-.18.174-.265.258-1.438 1.412-.492 3.763 1.567 3.938a75.306 75.306 0 0 0 12.325 0c2.06-.168 3.011-2.526 1.567-3.938-.09-.09-.181-.174-.266-.259a3.424 3.424 0 0 1-1.03-2.539 53.583 53.583 0 0 0-.135-5.582c-.182-2.384-2.3-4.21-4.812-4.262A103.96 103.96 0 0 0 12.002 2Z" />
+                        </svg>
+
+                    </button>
                     <button className="h-[30px] w-[30px] rounded-full bg-medium-soft-green flex items-center justify-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

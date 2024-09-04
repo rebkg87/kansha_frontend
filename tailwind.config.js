@@ -50,6 +50,7 @@ export default {
       },
       boxShadow: {
         'inner-inputV2': 'inset 0px 3px 4px rgba(0, 0, 0, 0.25)',
+        'navbar-b': '0px -2px 6px rgba(0, 0, 0, 0.10)'
       },
       plugins: []
     }
