@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Footer = () => {
     return (
-        <footer class="h-[309px] bg-soft-green flex flex-col justify-center items-center bottom-0 left-0 z-20 w-full p-4 ">
+        <footer className="h-[309px] bg-soft-green flex flex-col justify-center items-center bottom-0 left-0 z-20 w-full p-4 ">
             <div className='flex flex-row justify-center items-center gap-11 mb-3'>
                 <a href="https://www.instagram.com/" target="_blank" className="flex items-center justify-center" aria-label="Enlace a Instagram">
                     <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="none" viewBox="0 0 20 20">
@@ -31,7 +31,7 @@ export const Footer = () => {
                         </g>
                         <defs>
                             <clipPath id="a">
-                                <path fill="#fff" d="M.619.323h20.968v19.355H.619z" />
+                                <path className='fill-white' d="M.619.323h20.968v19.355H.619z" />
                             </clipPath>
                         </defs>
                     </svg>
