@@ -2,8 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "../layout/Layout";
 import Home from "../pages/HomePage";
 import { UserLayout } from "../layout/UserLayout";
-
-const TemporaryLoginPage = () => <div>Página de inicio de sesión aún no creada</div>;
+import RegisterPage from "../pages/RegisterPage";
 
 
 const router = createBrowserRouter([
@@ -11,7 +10,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Layout />,
         children: [
-            { path: "", element: <TemporaryLoginPage /> }
+            { path: "", element: <RegisterPage /> }
         ]
     },
     {
