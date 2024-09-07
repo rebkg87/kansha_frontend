@@ -27,7 +27,7 @@ const LoginPage = () => {
     useEffect(() => {
         if (data) {
             setToken(data.token)
-            navigate("home")
+            navigate("/user/home")
         }
     }, [data, setToken, navigate])
 
