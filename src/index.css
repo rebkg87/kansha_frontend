@@ -4,4 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-*{font-family: barlow};
+* {
+    font-family: barlow;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+;
