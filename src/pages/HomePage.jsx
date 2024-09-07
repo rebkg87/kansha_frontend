@@ -4,7 +4,7 @@ import InputV3 from "../components/general/InputV3"
 import { AffirmationCard } from "../components/profile/AffirmationCard"
 import { Greeting } from "../components/profile/Greeting";
 import NavbarBottonButton from "../components/userLayout/NavbarBottonButton";
-import homeIcon from '../../public/assets/images/icons/home.svg'
+import userIcon from '/assets/images/icons/profile.svg';
 import SmallButton from "../components/general/SmallButton"
 import googleIcon from '../../public/assets/images/icons/icons8-logo-de-google.svg'
 
