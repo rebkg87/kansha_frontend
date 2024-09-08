@@ -8,17 +8,39 @@ export const AffirmationCard = () => {
 
     const fecthAffirmation = async () => {
         try {
-            const response = await fetch('https://zenquotes.io/api/random')
+            const response = await fetch('https://www.affirmations.dev/');
             if (!response.ok) {
-                throw new Error (`Error: ${response.status}`)
+                throw new Error(`Error: ${response.status}`)
             }
             const data = await response.json()
-            const newAffirmation = data[0].q
+            const affirmationText = data[0]?.q; // Obtener el texto de la cita
+            if (!affirmationText) {
+                throw new Error('No affirmation text found');
+            }
 
-            localStorage.setItem("affirmation", newAffirmation)
-            localStorage.setItem("affirmationDate", new Date().toISOString().split('T')[0])
+            const translationResponse = await fetch('https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=es', {
+                mode: 'no-cors',
+                method: 'POST',
+                headers: {
+                    'Ocp-Apim-Subscription-Key': '8838c333d48c4dadadaf82554bac9344',
+                    'Ocp-Apim-Subscription-Region': 'westeurope',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify([{ Text: affirmationText }])
+                
+            }); if (!translationResponse.ok) {
+                throw new Error(`Error en la traducción: ${translationResponse.status}`);
+            }
 
-            setAffirmation(newAffirmation)
+            const translationData = await translationResponse.json();
+            const translatedText = translationData[0]?.translations[0]?.text; // Obtener el texto traducido
+
+            const fullAffirmation = `${translatedText}`;
+
+            localStorage.setItem('affirmation', fullAffirmation);
+            localStorage.setItem('affirmationDate', new Date().toISOString().split('T')[0]);
+
+            setAffirmation(fullAffirmation);
         } catch (error) {
             setError(error.message)
         } finally {
@@ -26,9 +48,9 @@ export const AffirmationCard = () => {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const storedAffirmation = localStorage.getItem("affirmation")
-        const storedDate = localStorage.getItem("affimationDate")
+        const storedDate = localStorage.getItem("affirmationDate")
         const today = new Date().toISOString().split('T')[0]
         if (!storedAffirmation || storedDate !== today) {
             fecthAffirmation()
@@ -45,14 +67,14 @@ export const AffirmationCard = () => {
             </div>
         )
     }
-    
+
     if (error) return <p>Error: {error}</p>;
 
     return (
         <div className='w-full h-[171px] border-2 border-soft-green rounded-[20px] shadow-inner-inputV2 bg-medium-soft-green flex flex-col justify-center items-center p-8'>
             <h6 className=' text-h6 font-barlow font-bold text-dark-green mb-2 mt-[-20px]'>Afirmación Diaria</h6>
             <h5 className='text-h5 font-barlow font-bold text-soft-green text-center leading-h5'>{affirmation ? affirmation : 'No se pudo obtener la afirmación'}</h5>
-        
+
         </div>
     )
 }
