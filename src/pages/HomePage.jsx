@@ -1,31 +1,20 @@
 import ButtonReg from "../components/general/ButtonReg"
 import InputV1 from "../components/general/InputV1"
 import InputV3 from "../components/general/InputV3"
-import { AffirmationCard } from "../components/profile/AffirmationCard"
 import { Greeting } from "../components/profile/Greeting";
 import NavbarBottonButton from "../components/userLayout/NavbarBottonButton";
 import userIcon from '/assets/images/icons/profile.svg';
 import SmallButton from "../components/general/SmallButton"
 import googleIcon from '../../public/assets/images/icons/icons8-logo-de-google.svg'
+import {AffirmationCard} from "../components/profile/AffirmationCard"
 
 const Home = ({ }) => {
     return (
         <div className="flex flex-col p-11 gap-3">
-            <ButtonReg type="button" buttonStyle='bg-medium-soft-green text-white' buttonText="Iniciar Sesión" imgButtonStyle="hidden" />
-            <ButtonReg type="button" buttonStyle='bg-white text-gray border-2 border-soft-green' buttonText="Iniciar Sesión con Google" iconButton={googleIcon} imgButtonStyle='h-[20px] w-[20px]' />
-
-            <InputV1 placeholder={"Email"} />
-            <AffirmationCard />
-            <InputV3
-                type="text"
-                id="name"
-                placeholder="Nombre y Apellido"
-                iconInput={userIcon}
-                labelInput="User icon"
-            />
+            <AffirmationCard/>
+            
             <Greeting greeting={"Buenos días"} name={"Rebeca"}
             />
-            <SmallButton buttonStyle='w-[95px] h-[45px] bg-medium-green text-super-light-green' buttonText="Guardar"/>
 
         </div>
     )
