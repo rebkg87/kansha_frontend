@@ -4,8 +4,8 @@ export const Greeting = ({ greeting, name }) => {
     return (
         <div className='flex flex-row justify-around bg-gradient-to-b from-medium-soft-green to-soft-green pt-5 h-[109px] w-full'>
             <div>
-                <h5 className='font-bold text-medium-green text-h5 mb-[-5px]'> {greeting} </h5>
-                <h5 className='font-bold text-medium-soft-green text-h5'> {name} </h5>
+                <h5 className='font-bold text-medium-green text-[24px] mb-[-12px]'> {greeting} </h5>
+                <h5 className='font-bold text-medium-soft-green text-[24px]'> {name} </h5>
             </div>
             <div className='h-[70px] w-[70px] relative'>
                 <button className='ring-2 rounded-full items-center justify-center ring-dark-green overflow-hidden h-full w-full flex relative group'>
