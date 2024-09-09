@@ -6,15 +6,20 @@ import NavbarBottonButton from "../components/userLayout/NavbarBottonButton";
 import userIcon from '/assets/images/icons/profile.svg';
 import SmallButton from "../components/general/SmallButton"
 import googleIcon from '../../public/assets/images/icons/icons8-logo-de-google.svg'
-import {AffirmationCard} from "../components/profile/AffirmationCard"
+import { AffirmationCard } from "../components/profile/AffirmationCard"
+import WeekCalendar from "../components/profile/WeekCalendar";
 
 const Home = ({ }) => {
     return (
-        <div className="flex flex-col p-11 gap-3">
-            <AffirmationCard/>
-            
-            <Greeting greeting={"Buenos días"} name={"Rebeca"}
-            />
+        <div className="flex flex-col">
+            <Greeting className="w-max" greeting={"Buenos días"} name={"Rebeca"} />
+            <div className="m-4">
+                <WeekCalendar />
+            </div>
+            <div className="p-11">
+                <AffirmationCard />
+
+            </div>
 
         </div>
     )
