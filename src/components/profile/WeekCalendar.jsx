@@ -1,86 +1,49 @@
-import React from 'react'
+import { addDays, addWeeks, format, isSameDay, startOfWeek, subWeeks } from 'date-fns'
+import React, { useState } from 'react'
+import DayCard from './DayCard'
+import { es } from 'date-fns/locale'
 
 const WeekCalendar = () => {
+
+    const [currentWeekStart, setCurrentWeekStart] = useState(startOfWeek(new Date(), { weekStartsOn: 0 }))
+
+    const goToPreviousWeek = () => {
+        setCurrentWeekStart(prevWeek => subWeeks(prevWeek, 1))
+    }
+
+    const goToNextWeek = () => {
+        setCurrentWeekStart(prevWeek => addWeeks(prevWeek, 1))
+    }
+
+    const today = new Date()
+    const daysOfTheWeek = Array.from({ length: 7 }, (_, index) => {
+        const dayDate = addDays(currentWeekStart, index)
+        const isToday = isSameDay(dayDate, today)
+        return {
+            dayNumber: format(dayDate, 'd', { locale: es }),
+            dayWeek: format(dayDate, 'EEE', { locale: es }),
+            isToday
+        }
+    })
+
+    console.log('Days of the Week:', daysOfTheWeek);
+
+
     return (
-            <div class="flex flex-shrink w-[100%] justify-center items-center bg-white md:justify-center rounded-lg ">
+        <div class="flex flex-shrink w-[100%] justify-center items-center bg-white md:justify-center rounded-lg ">
 
-                <button className="rounded-full bg-medium-soft-green flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24">
-                        <path className=' rotate-0 fill-soft-green' d="M5.767 7.147 4.353 8.56l7.707 7.706 7.707-7.706-1.413-1.414-6.293 6.207-6.294-6.207Z" />
-                    </svg>
-                </button>
+            <button onClick={goToPreviousWeek} className="p-1 text-h4 rounded-full bg-medium-soft-green flex items-center justify-center text-center text-soft-green">
+                ￩
+            </button>
 
-                <div class="flex group hover:bg-soft-green hover:bg-opacity-25 hover:shadow-lg rounded-lg mx-1 transition-all duration-150 cursor-pointer justify-center">
-                    <div class="flex items-center">
-                        <div class="text-center">
-                            <p class="text-gray-800 group-hover:text-medium-soft-green font-bold transition-all duration-150 text-h5"> 10 </p>
-                            <p class="text-gray-800 group-hover:text-medium-soft-green text-sm transition-all duration-150"> Dom </p>
-                        </div>
-                    </div>
-                </div>
+            {daysOfTheWeek.map((day, index) => (
+                <DayCard key={index} dayNumber={day.dayNumber} dayWeek={day.dayWeek} isToday={day.isToday} />
+            ))}
 
-                <div class="flex group hover:bg-soft-green hover:bg-opacity-25 hover:shadow-lg rounded-lg mx-1 transition-all duration-150 cursor-pointer justify-center">
-                    <div class="flex items-center ">
-                        <div class="text-center">
-                            <p class="text-gray-800 group-hover:text-medium-soft-green font-bold transition-all duration-150 text-h5"> 11 </p>
-                            <p class="text-gray-800 group-hover:text-medium-soft-green text-sm transition-all duration-150"> Lun </p>
-                        </div>
-                    </div>
-                </div>
+            <button onClick={goToNextWeek} className="p-1 text-h4 rounded-full bg-medium-soft-green flex items-center justify-center text-center text-soft-green">
+                ￫
+            </button>
 
-                <div class="flex group hover:bg-soft-green hover:bg-opacity-25 hover:shadow-lg rounded-lg mx-1 transition-all duration-150 cursor-pointer justify-center">
-                    <div class="flex items-center ">
-                        <div class="text-center">
-                            <p class="text-gray-800 group-hover:text-medium-soft-green font-bold transition-all duration-150 text-h5"> 12 </p>
-                            <p class="text-gray-800 group-hover:text-medium-soft-green text-sm transition-all duration-150"> Mar</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex group bg-soft-green shadow-xl rounded-lg mx-1 cursor-pointer justify-center relative h-17">
-                    <span class="flex h-3 w-3 absolute -botton-1 -center-1">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-medium-soft-green opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-medium-soft-green"></span>
-                    </span>
-                    <div class="flex items-center ">
-                        <div class="text-center">
-                            <p class="text-medium-green group-hover:text-medium-soft-green font-bold transition-all duration-150 text-h5"> 13 </p>
-                            <p class="text-medium-green group-hover:text-medium-soft-green text-sm transition-all duration-150"> Mié </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex group hover:bg-soft-green hover:bg-opacity-25 hover:shadow-lg rounded-lg mx-1 transition-all duration-150 cursor-pointer justify-center">
-                    <div class="flex items-center ">
-                        <div class="text-center">
-                            <p class="text-gray-800 group-hover:text-medium-soft-green font-bold transition-all duration-150 text-h5"> 14 </p>
-                            <p class="text-gray-800 group-hover:text-medium-soft-green text-sm transition-all duration-150"> Jue </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex group hover:bg-soft-green hover:bg-opacity-25 hover:shadow-lg rounded-lg mx-1 transition-all duration-150 cursor-pointer justify-center">
-                    <div class="flex items-center ">
-                        <div class="text-center">
-                            <p class="text-gray-800 group-hover:text-medium-soft-green font-bold transition-all duration-150 text-h5"> 15 </p>
-                            <p class="text-gray-800 group-hover:text-medium-soft-green text-sm transition-all duration-150"> Vie </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex group hover:bg-soft-green hover:bg-opacity-25 hover:shadow-lg rounded-lg mx-1 transition-all duration-150 cursor-pointer justify-center">
-                    <div class="flex items-center ">
-                        <div class="text-center">
-                            <p class="text-gray-800 group-hover:text-medium-soft-green font-bold transition-all duration-150 text-h5"> 16 </p>
-                            <p class="text-gray-800 group-hover:text-medium-soft-green text-sm transition-all duration-150"> Sáb </p>
-                        </div>
-                    </div>
-                </div>
-                <button className="rounded-full bg-medium-soft-green flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24">
-                        <path className=' rotate-0 fill-soft-green' d="M5.767 7.147 4.353 8.56l7.707 7.706 7.707-7.706-1.413-1.414-6.293 6.207-6.294-6.207Z" />
-                    </svg>
-                </button>
         </div>
     )
 }
