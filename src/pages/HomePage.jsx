@@ -1,15 +1,15 @@
-import ButtonReg from "../components/general/ButtonReg"
-import InputV1 from "../components/general/InputV1"
-import InputV3 from "../components/general/InputV3"
-import { Greeting } from "../components/profile/Greeting";
-import NavbarBottonButton from "../components/userLayout/NavbarBottonButton";
-import userIcon from '/assets/images/icons/profile.svg';
-import SmallButton from "../components/general/SmallButton"
-import googleIcon from '../../public/assets/images/icons/icons8-logo-de-google.svg'
-import { AffirmationCard } from "../components/profile/AffirmationCard"
-import WeekCalendar from "../components/profile/WeekCalendar";
+import { Greeting } from "../components/home/Greeting"
+import { AffirmationCard } from "../components/home/AffirmationCard"
+import WeekCalendar from "../components/home/WeekCalendar"
+import AddGratitudeBtn from "../components/home/AddGratitudeBtn"
+import { useNavigate } from "react-router-dom"
 
 const Home = ({ }) => {
+
+    const navigate = useNavigate()
+    const handleAddGratitudeClick = () => {
+        navigate('/user/gratitude')
+    }
     return (
         <div className="flex flex-col">
             <Greeting className="w-max" greeting={"Buenos días"} name={"Rebeca"} />
@@ -18,9 +18,10 @@ const Home = ({ }) => {
             </div>
             <div className="p-11">
                 <AffirmationCard />
-
             </div>
-
+            <div className='mt-[-20px] ml-11 mb-5'>
+                <AddGratitudeBtn onClick={handleAddGratitudeClick} />
+            </div>
         </div>
     )
 }
