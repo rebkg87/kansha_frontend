@@ -1,4 +1,3 @@
-import React from "react";
 const ButtonReg = ({ onClick, buttonText, buttonStyle, imgButtonStyle, iconButton, label }) => {
     return (
         <div className="flex justify-between">

@@ -1,10 +1,10 @@
 import React from 'react'
-import AddGratitudeBtn from '../components/home/AddGratitudeBtn'
+import DailyGratitudeForm from '../components/gratitude/DailyGratitudeForm'
 
 const GratitudePage = () => {
     return (
         <div>
-            <AddGratitudeBtn/>
+            <DailyGratitudeForm/>
         </div>
     )
 }

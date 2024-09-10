@@ -12,10 +12,6 @@ const Home = ({ }) => {
     }
     return (
         <div className="flex flex-col">
-            <Greeting className="w-max" greeting={"Buenos días"} name={"Rebeca"} />
-            <div className="m-4 mb-[-20px]">
-                <WeekCalendar />
-            </div>
             <div className="p-11">
                 <AffirmationCard />
             </div>
