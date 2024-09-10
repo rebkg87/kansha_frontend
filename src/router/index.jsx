@@ -4,6 +4,7 @@ import Home from "../pages/HomePage";
 import { UserLayout } from "../layout/UserLayout";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
+import GratitudePage from "../pages/GratitudePage";
 
 
 const router = createBrowserRouter([
@@ -19,7 +20,8 @@ const router = createBrowserRouter([
         path: "/user",
         element: <UserLayout/>,
         children: [
-            { path: "home", element: <Home/> }
+            { path: "home", element: <Home/> },
+            { path: "gratitude", element: <GratitudePage/> }
         ]
     }
 ])
