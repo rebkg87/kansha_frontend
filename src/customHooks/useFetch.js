@@ -25,7 +25,7 @@ const useFetch = (endpoint, options, shouldFetch = true) => {
     useEffect(() => {
         if (!shouldFetch) return
         fetchData()
-    }, [endpoint])
+    }, [endpoint, shouldFetch])
     return { data, loading, error, fetch: fetchData }
 }
 
