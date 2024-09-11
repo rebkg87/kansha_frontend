@@ -23,3 +23,9 @@ export const loginSchema = yup.object().shape({
         .matches(/[A-Z]/, "La contraseña debe tener al menos una mayúscula")
         .matches(/[a-z]/, "La contraseña debe tener al menos una minúscula")
 })
+
+
+export const gratitudeFormSchema = yup.object().shape({
+    gratitude_text: yup.string().required("Este campo es obligatorio")
+})
+

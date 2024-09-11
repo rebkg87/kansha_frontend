@@ -10,6 +10,7 @@ import emailIcon from '/assets/images/icons/inbox.svg'
 import passwordIcon from '/assets/images/icons/lock.svg'
 import googleIcon from '/assets/images/icons/icons8-logo-de-google.svg'
 import ButtonReg from '../components/general/ButtonReg'
+import useGet from '../customHooks/useGet'
 
 const LoginPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -17,6 +18,7 @@ const LoginPage = () => {
     })
 
     const { error, executePost, data } = usePost("/auth/login")
+    
     const { setToken } = useUser()
     const navigate = useNavigate()
 

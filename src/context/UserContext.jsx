@@ -8,7 +8,7 @@ const decodeToken = (token) => {
     try {
         return jwtDecode(token)
     } catch (error) {
-        console.error("Invalid token: ", error)
+        console.error("Token inválido: ", error)
         return null
     }
 }
@@ -17,12 +17,15 @@ export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [token, setToken] = useState(() => localStorage.getItem("jwtToken"))
 
+    console.log(user);
+    
     useEffect(() => {
         if (token) {
-            const decodeUser = decodeToken(token)
-            setUser({ email: decodeUser.sub })
+            const decodedUser = decodeToken(token);
+            setUser({ email: decodedUser.sub })
         } else {
             setUser(null)
+
         }
     }, [token])
 
@@ -35,8 +38,9 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem("jwtToken")
         setToken(null)
     }
+
     return (
-        <UserContext.Provider value={{ user, token, setToken: saveToken, clearToken }}>{children}</UserContext.Provider>
+        <UserContext.Provider value={{ user, setUser, token, setToken: saveToken, clearToken }}>{children}</UserContext.Provider>
     )
 }
 
