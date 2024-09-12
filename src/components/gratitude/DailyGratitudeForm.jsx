@@ -9,7 +9,6 @@ import useDelete from "../../customHooks/useDelete"
 import usePut from "../../customHooks/usePut"
 import { useEffect, useState } from "react"
 import { useUser } from "../../context/UserContext"
-import dataContextUser from "../../pages/HomePage"
 
 
 const DailyGratitudeForm = () => {
@@ -19,6 +18,8 @@ const DailyGratitudeForm = () => {
     const { user, setUser } = useUser()
 
     const { data: gratitudes, fetch: fetchGratitudes } = useGet(`/gratitudes/`)
+    console.log(gratitudes)
+
 
     const onSubmit = (formData) => {
         executePost({ formData })
@@ -92,16 +93,21 @@ const DailyGratitudeForm = () => {
             </div>
 
             <div>
-                {gratitudes.map(gratitude => (
+                <GratitudeItems
+                />
+            </div>
+
+            {/* <div>
+                {gratitudes.map((gratitude) => ( 
 
                     <GratitudeItems
-                        key={gratitude.id}
-                        text={gratitude.gratitudeText}
+                        //key={gratitude.id}
+                        //text={gratitude.gratitudeText}
                         //onDelete={() => handleDelete(gratitudes.id)}
 
                     />
                 ))}
-            </div>
+            </div> */}
 
 
         </div>
