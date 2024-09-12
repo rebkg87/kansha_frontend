@@ -9,6 +9,7 @@ import useDelete from "../../customHooks/useDelete"
 import usePut from "../../customHooks/usePut"
 import { useEffect, useState } from "react"
 import { useUser } from "../../context/UserContext"
+import SmallButton from "../general/SmallButton"
 
 
 const DailyGratitudeForm = () => {
@@ -24,63 +25,6 @@ const DailyGratitudeForm = () => {
     const onSubmit = (formData) => {
         executePost({ formData })
     }
-
-
-
-
-    /*console.log(UserDataGlobal.id);
-    
-    const { user, setUser } = useUser()
-     
-    const userId = user?.userId
-    
-    const { data: dataUser, fetch: fetchUser } = useGet(`/users/user`)
-    
-    console.log(dataUser);
-     
-    const { data: userGratitude, fetch: fetchUserGratitude } = useGet(`/gratitudes/user/${userId}`)
-    
-    const { executePost, data: postData } = usePost("/gratitudes")
-    /*const { executeDelete } = useDelete(`/gratitudes/${id}`)
-    const { executePut } = usePut(`/gratitude/${userId}`)
-    
-    //const [gratitudes, setGratitudes] = useState([])
-    
-    
-    const navigate = useNavigate()
-    
-    useEffect(() => {
-        if (!userId) {
-            console.error("User ID is missing");
-        } else {
-            console.log(`userId: ${userId}`);
-            
-            //fetchUserGratitude()
-        }
-    }, [userId])
-    
-    useEffect(() => {
-        if (userGratitude) {
-            setGratitudes(userGratitude)
-        }
-    }, [userGratitude])
-    
-    const onSubmit = (formData) => {
-        executePost({ formData })
-    
-    }
-    
-    useEffect(() => {
-        if (postData) {
-            setGratitudes((prevGratitudes) => [...prevGratitudes, postData])
-        }
-    }, [postData])
-    
-    /*const handleDelete = (id) => {
-        executeDelete(id).then(() => {
-            setGratitudes((prevGratitudes) => prevGratitudes.filter((gratitude) => gratitude.id !== id))
-        })
-    }*/
 
     return (
         <div className='w-full h-screen bg-dark-green p-11'>
@@ -108,6 +52,10 @@ const DailyGratitudeForm = () => {
                     />
                 ))}
             </div> */}
+
+            <div className="flex justify-center items-center ">
+                <SmallButton buttonStyle={'bg-medium-soft-green h-12 w-28 text-center text-soft-green mt-12'} buttonText={"Guardar"} />
+            </div>
 
 
         </div>
