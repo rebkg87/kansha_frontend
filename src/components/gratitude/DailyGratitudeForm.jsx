@@ -36,22 +36,22 @@ const DailyGratitudeForm = () => {
                 <button type="submit" onClick={handleSubmit(onSubmit)} className="border-none rounded-full bg-medium-soft-green w-10 h-10 font-medium text-h4 text-soft-green cursor-pointer"> + </button>
             </div>
 
-            <div>
+            {/* <div>
                 <GratitudeItems
                 />
-            </div>
+            </div> */}
 
-            {/* <div>
+            <div>
                 {gratitudes.map((gratitude) => ( 
 
                     <GratitudeItems
-                        //key={gratitude.id}
-                        //text={gratitude.gratitudeText}
+                        key={gratitude.id}
+                        text={gratitude.gratitudeText}
                         //onDelete={() => handleDelete(gratitudes.id)}
 
                     />
                 ))}
-            </div> */}
+            </div>
 
             <div className="flex justify-center items-center ">
                 <SmallButton buttonStyle={'bg-medium-soft-green h-12 w-28 text-center text-soft-green mt-12'} buttonText={"Guardar"} />
