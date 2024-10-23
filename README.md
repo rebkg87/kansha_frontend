@@ -48,6 +48,9 @@ Las contribuciones son bienvenidas. Por favor, abre un issue o envía un pull re
 ## Capturas de Pantalla
 
 
+https://github.com/user-attachments/assets/77b210dc-baff-4d5a-80da-40acf7b1464d
+
+
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT - consulta el archivo [LICENSE](LICENSE) para más detalles.
