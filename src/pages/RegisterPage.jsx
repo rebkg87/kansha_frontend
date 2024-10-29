@@ -68,7 +68,7 @@ const RegisterPage = () => {
                             <InputV3 {...register("confirmPassword")}
                                 type="text"
                                 id="confirmPassword"
-                                placeholder="Contraseña"
+                                placeholder="Repite tu contraseña"
                                 iconInput={confirmpasswordIcon}
                                 labelInput="Password icon"
                             />
