@@ -18,7 +18,7 @@ const LoginPage = () => {
     })
 
     const { error, executePost, data } = usePost("/auth/login")
-    
+
     const { setToken } = useUser()
     const navigate = useNavigate()
 
@@ -37,7 +37,7 @@ const LoginPage = () => {
         <div className='flex justify-center items-center w-screen h-screen bg-gradient-to-t from-medium-soft-green/50 to-white p-8'>
             <div className='flex flex-col justify-center'>
                 <form onSubmit={handleSubmit(onSubmit)} className='w-[340px] h-[588px]'>
-                <img src='/assets/images/logo/logo-icon.png' alt='logo' className='mx-auto mb-6'/>
+                    <img src='/assets/images/logo/logo-icon.png' alt='logo' className='mx-auto mb-6' />
                     <div className='flex flex-col justify-items-start'>
                         <h2 className='text-h2 text-left font-bold text-dark-green'>Iniciar Sesión</h2>
                         <p className=' text-long-paragrah text-gray text-left  mb-[44px]'>Inicie sesión para continuar en su cuenta.</p>
