@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from '../customHooks/validationSchemas'
 import usePost from '../customHooks/usePost'
@@ -10,7 +10,7 @@ import emailIcon from '/assets/images/icons/inbox.svg'
 import passwordIcon from '/assets/images/icons/lock.svg'
 import googleIcon from '/assets/images/icons/icons8-logo-de-google.svg'
 import ButtonReg from '../components/general/ButtonReg'
-import useGet from '../customHooks/useGet'
+import Loader from '../components/general/Loader'
 
 const LoginPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -18,9 +18,10 @@ const LoginPage = () => {
     })
 
     const { error, executePost, data } = usePost("/auth/login")
-
     const { setToken } = useUser()
     const navigate = useNavigate()
+
+    const [isGoogleAuth, setIsGoogleAuth] = useState(false);
 
     const onSubmit = (formData) => {
         executePost(formData)
@@ -33,9 +34,26 @@ const LoginPage = () => {
         }
     }, [data, setToken, navigate])
 
+    const handleGoogleLogin = () => {
+        setIsGoogleAuth(true)
+        window.location.href = "http://localhost:3001/oauth2/authorization/google"
+
+        useEffect(()=> {
+            const token = localStorage.getItem("authToken")
+            if (token) {
+                setIsGoogleAuth(true)
+            } else {
+                setIsGoogleAuth(false)
+            }
+        }, [])
+    }
+
     return (
         <div className='flex justify-center items-center w-screen h-screen bg-gradient-to-t from-medium-soft-green/50 to-white p-8'>
-            <div className='flex flex-col justify-center'>
+            {isGoogleAuth ? (
+                <Loader/>
+            ) : (
+                <div className='flex flex-col justify-center'>
                 <form onSubmit={handleSubmit(onSubmit)} className='w-[340px] h-[588px]'>
                     <img src='/assets/images/logo/logo-icon.png' alt='logo' className='mx-auto mb-6' />
                     <div className='flex flex-col justify-items-start'>
@@ -51,7 +69,7 @@ const LoginPage = () => {
                                 iconInput={emailIcon}
                                 labelInput="Email icon"
                             />
-                            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                            {errors.email && !isGoogleAuth && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                             <InputV3 {...register("password")}
                                 type="password"
                                 id="password"
@@ -59,7 +77,7 @@ const LoginPage = () => {
                                 iconInput={passwordIcon}
                                 labelInput="Password icon"
                             />
-                            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                            {errors.password && !isGoogleAuth && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                         </div>
                         {error && (
                             <div className="p-1 m-[-25px] text-sm text-center text-red rounded-lg" role="alert">
@@ -69,7 +87,7 @@ const LoginPage = () => {
                         <div className='mt-4'>
                             <ButtonReg type="submit" buttonStyle='bg-medium-soft-green text-white mt-6' buttonText="Inicia Sesión" imgButtonStyle="hidden" />
                             <p className='text-center font-medium text-[24px] m-2'> o </p>
-                            <ButtonReg type="submit" buttonStyle='bg-white text-gray border-2 border-soft-green' buttonText="Iniciar Sesión con Google" iconButton={googleIcon} imgButtonStyle='h-[20px] w-[20px]' />
+                            <ButtonReg type="button" onClick={handleGoogleLogin} buttonStyle='bg-white text-gray border-2 border-soft-green' buttonText="Iniciar Sesión con Google" iconButton={googleIcon} imgButtonStyle='h-[20px] w-[20px]' />
                         </div>
                     </div>
                 </form>
@@ -77,6 +95,7 @@ const LoginPage = () => {
                     <a href='/signup' className='text-long-paragrah text-dark-green font-medium underline'>Crea una</a>
                 </div>
             </div>
+        )}
         </div>
     )
 }
