@@ -15,27 +15,33 @@ const decodeToken = (token) => {
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-    const [token, setToken] = useState(() => localStorage.getItem("jwtToken"))
+    const [token, setToken] = useState(() => localStorage.getItem("authToken"))
 
-    console.log(user);
-    
+    console.log("User Context Loaded ->", user);
+
     useEffect(() => {
         if (token) {
             const decodedUser = decodeToken(token);
-            setUser({ email: decodedUser.sub })
+            if (decodedUser) {
+                setUser({
+                    email: decodedUser.sub,
+                    exp: decodedUser.exp,
+                })
+            } else {
+                setUser(null)
+            }
         } else {
             setUser(null)
-
         }
     }, [token])
 
     const saveToken = (newToken) => {
-        localStorage.setItem("jwtToken", newToken)
+        localStorage.setItem("authToken", newToken)
         setToken(newToken)
     }
 
     const clearToken = () => {
-        localStorage.removeItem("jwtToken")
+        localStorage.removeItem("authToken")
         setToken(null)
     }
 

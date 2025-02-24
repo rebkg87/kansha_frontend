@@ -6,6 +6,7 @@ import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import GratitudePage from "../pages/GratitudePage";
 import FrontPage from "../pages/FrontPage";
+import OAutjRedirectHandler from "../pages/OAutjRedirectHandler";
 
 
 const router = createBrowserRouter([
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
         children: [
             { path: "signup", element: <RegisterPage /> },
             { path: "login", element:<LoginPage/> },
-            { path:"/", element: <FrontPage/>}
+            { path:"/", element: <FrontPage/>},
+            { path:"/oauth2/redirect", element:<OAutjRedirectHandler/>}
         ]
     },
     {
