@@ -28,7 +28,7 @@ const FrontPage = () => {
                 
                     <img
                         className="logo"
-                        src="public\assets\images\logo\logo-vert.png"
+                        src="\assets\images\logo\logo-vert.png"
                         alt="StudyBoard"
                     />
                 </motion.div>)}

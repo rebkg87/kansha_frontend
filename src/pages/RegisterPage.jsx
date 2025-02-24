@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputV3 from '../components/general/InputV3'
 import userIcon from '/assets/images/icons/profile.svg';
 import emailIcon from '/assets/images/icons/inbox.svg'
@@ -12,16 +12,22 @@ import usePost from '../customHooks/usePost';
 import { useUser } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { signUpSchema } from '../customHooks/validationSchemas';
+import { GOOGLE_CLIENT_ID } from '../config'
+import Loader from '../components/general/Loader';
+
 
 
 const RegisterPage = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(signUpSchema),
     })
 
     const { error, executePost, data } = usePost("/auth/signup")
     const { setToken } = useUser()
     const navigate = useNavigate()
+
+    const [errorMessage, setErrorMessage] = useState(null); 
+    const [isGoogleAuth, setIsGoogleAuth] = useState(false);
 
     const onSubmit = (formData) => {
         executePost(formData)
@@ -34,8 +40,27 @@ const RegisterPage = () => {
         }
     }, [data, setToken, navigate])
 
+    const handleGoogleSignup = () => {
+        setIsGoogleAuth(true);
+        window.location.href = "http://localhost:3001/oauth2/authorization/google";
+    };
+    
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        
+        if (token) {
+            setIsGoogleAuth(true); 
+        } else {
+            setIsGoogleAuth(false);
+        }
+    }, []);
+    
+
     return (
         <div className='flex justify-center items-center w-screen h-screen bg-gradient-to-t from-medium-soft-green/50 to-white p-8'>
+            {isGoogleAuth ? (
+                <Loader/>
+            ) : (
             <div className='flex flex-col justify-center'>
                 <form onSubmit={handleSubmit(onSubmit)} className='w-[340px] h-[588px]'>
                     <h2 className='text-h2 text-left font-bold text-dark-green mb-[44px]'>Regístrate</h2>
@@ -48,7 +73,7 @@ const RegisterPage = () => {
                                 iconInput={userIcon}
                                 labelInput="User icon"
                             />
-                            {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+                            {errors.name && !isGoogleAuth && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                             <InputV3 {...register("email")}
                                 type="text"
                                 id="email"
@@ -56,17 +81,17 @@ const RegisterPage = () => {
                                 iconInput={emailIcon}
                                 labelInput="Email icon"
                             />
-                            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                            {errors.email && !isGoogleAuth && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                             <InputV3 {...register("password")}
-                                type="text"
+                                type="password"
                                 id="password"
                                 placeholder="Contraseña"
                                 iconInput={passwordIcon}
                                 labelInput="Password icon"
                             />
-                            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                            {errors.password && !isGoogleAuth && <p className="text-red-500 text-sm">{errors.password.message}</p>}
                             <InputV3 {...register("confirmPassword")}
-                                type="text"
+                                type="password"
                                 id="confirmPassword"
                                 placeholder="Repite tu contraseña"
                                 iconInput={confirmpasswordIcon}
@@ -74,14 +99,19 @@ const RegisterPage = () => {
                             />
                         </div>
                         {error && (
-                            <div className="p-1 m-[-25px] text-sm text-center text-red rounded-lg" role="alert">
-                                <span className="font-medium">Hubo un error:</span> {error}
+                            <div className="p-1 m-[-25px] text-sm text-center text-red-500 rounded-lg mt-2" role="alert">
+                                <span className="font-bold">Hubo un error:</span> {error}
+                            </div>
+                        )}
+                        {errorMessage && ( 
+                            <div className="p-1 m-[-25px] text-sm text-center text-red-500 rounded-lg mt-4" role="alert">
+                                <span className="font-bold">{errorMessage}</span>
                             </div>
                         )}
                         <div className='mt-10'>
                             <ButtonReg type="submit" buttonStyle='bg-medium-soft-green text-white mt-6' buttonText="Regístrate" imgButtonStyle="hidden" />
                             <p className='text-center font-medium text-[24px] m-2'> o </p>
-                            <ButtonReg type="submit" buttonStyle='bg-white text-gray border-2 border-soft-green' buttonText="Regístrate con Google" iconButton={googleIcon} imgButtonStyle='h-[20px] w-[20px]' />
+                            <ButtonReg type="button" onClick={handleGoogleSignup} buttonStyle='bg-white text-gray border-2 border-soft-green' buttonText="Regístrate con Google" iconButton={googleIcon} imgButtonStyle='h-[20px] w-[20px]' />
                         </div>
                     </div>
                 </form>
@@ -89,6 +119,7 @@ const RegisterPage = () => {
                     <a href='/login' className='text-long-paragrah text-dark-green font-medium underline'>Inicia Sesión</a>
                 </div>
             </div>
+        )}
         </div>
     )
 }

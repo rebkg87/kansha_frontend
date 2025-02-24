@@ -5,10 +5,6 @@ import useFetch from './useFetch'
 const usePost = (endpoint) => {
     const { token } = useUser()
 
-    const executePost = async (data) => {
-        fetch({ body: JSON.stringify(data) })}
-    
-
     const { data, loading, error, fetch } = useFetch(
         endpoint,
         {
@@ -20,6 +16,11 @@ const usePost = (endpoint) => {
         },
         false
     )
+
+    const executePost = async (data) => {
+        fetch({ body: JSON.stringify(data) })
+    }
+    
 
     return { data, loading, error, executePost };
 }

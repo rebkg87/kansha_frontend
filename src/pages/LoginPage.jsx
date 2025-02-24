@@ -53,7 +53,7 @@ const LoginPage = () => {
                             />
                             {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                             <InputV3 {...register("password")}
-                                type="text"
+                                type="password"
                                 id="password"
                                 placeholder="Contraseña"
                                 iconInput={passwordIcon}
