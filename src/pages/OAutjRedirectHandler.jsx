@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import Loader from "../components/general/Loader";
 
 const OAutjRedirectHandler = () => {
     const navigate = useNavigate();
@@ -24,7 +25,9 @@ const OAutjRedirectHandler = () => {
         }
     }, [navigate, location, setToken]);
 
-    return <p>Redirigiendo...</p>;
+    return <div className='flex justify-center items-center w-screen h-screen bg-gradient-to-t from-medium-soft-green/50 to-white p-8'>
+        <Loader/>
+    </div>;
 };
 
 export default OAutjRedirectHandler;
